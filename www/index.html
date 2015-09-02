@@ -5,44 +5,28 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
     <!-- compiled css output -->
-    <link href="css/ionic.app.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
   </head>
-  <body ng-app="starter">
+  <body ng-app="sagffl">
 
-    <!--<ion-pane>-->
-      <!--<ion-header-bar class="bar-stable">-->
-        <!--<h1 class="title">Ionic Blank Starter</h1>-->
-      <!--</ion-header-bar>-->
-      <!--<ion-content>-->
-        <ion-side-menus>
-
-          <!--Center content-->
-          <ion-side-menu-content>
-            <ion-header-bar class="bar-dark">
-              <h1 class="title">SAGFFL</h1>
-            </ion-header-bar>
-            <ion-nav-view></ion-nav-view>
-          </ion-side-menu-content>
-
-          <!--Left menu-->
-          <ion-side-menu side="left">
-            <ion-header-bar class="bar-dark">
-              <h1 class="title">Projects</h1>
-            </ion-header-bar>
-          </ion-side-menu>
-
-        </ion-side-menus>
-      <!--</ion-content>-->
-    <!--</ion-pane>-->
-
+    <ion-nav-view></ion-nav-view>
 
     <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ionic/release/js/ionic.bundle.js"></script>
+    <script src="lib/ionic-material/dist/ionic.material.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
     <!-- your app's js -->
     <script src="js/app.module.js"></script>
     <script src="js/app.routes.js"></script>
+
+    <!--controllers -->
+    <script src="templates/menu.controller.js"></script>
     <script src="templates/home/home.controller.js"></script>
+    <script src="templates/photos/photos.controller.js"></script>
+
+    <!--services -->
+    <script src="js/services/anchor.service.js"></script>
+
   </body>
 </html>

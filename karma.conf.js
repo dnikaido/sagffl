@@ -10,17 +10,18 @@ module.exports = function(config) {
     basePath: basePath,
 
     // frameworks to use
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['mocha', 'chai-sinon'],
 
     // list of files / patterns to load in the browser
     files: [
-      basePath + '/www/lib/ionic/js/ionic.js',
       basePath + '/www/lib/angular/angular.js',
       basePath + '/www/lib/angular-animate/angular-animate.js',
       basePath + '/www/lib/angular-sanitize/angular-sanitize.js',
       basePath + '/www/lib/angular-ui-router/release/angular-ui-router.js',
       basePath + '/www/lib/angular-mocks/angular-mocks.js',
-      basePath + '/www/lib/ionic/js/ionic-angular.js',
+      basePath + '/www/lib/ionic/release/js/ionic.js',
+      basePath + '/www/lib/ionic/release/js/ionic-angular.js',
+      basePath + '/www/lib/ionic-material/dist/ionic.material.js',
       basePath + '/www/js/**/*.js',
       basePath + '/www/templates/**/*.js'
     ],

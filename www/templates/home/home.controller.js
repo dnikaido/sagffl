@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  angular.module('starter')
+  angular.module('sagffl')
     .controller('HomeController', HomeController);
 
   HomeController.$inject = ['$log', '$scope'];
