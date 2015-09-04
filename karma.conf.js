@@ -22,6 +22,8 @@ module.exports = function(config) {
       basePath + '/www/lib/ionic/release/js/ionic.js',
       basePath + '/www/lib/ionic/release/js/ionic-angular.js',
       basePath + '/www/lib/ionic-material/dist/ionic.material.js',
+      'https://connect.facebook.net/en_US/sdk.js',
+      basePath + '/www/lib/underscore/underscore.js',
       basePath + '/www/js/**/*.js',
       basePath + '/www/templates/**/*.js'
     ],

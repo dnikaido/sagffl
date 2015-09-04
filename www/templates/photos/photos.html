@@ -1,5 +1,9 @@
 <ion-view title="Photos">
   <ion-content padding="true">
     <h1>Photos</h1>
+    <div class="image"
+      ng-repeat="url in vm.photoUrls">
+      <img ng-src="{{ url }}" />
+    </div>
   </ion-content>
 </ion-view>

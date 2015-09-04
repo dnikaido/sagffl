@@ -5,6 +5,7 @@
     "angular-mocks": "#1.3.13",
     "ionic": "#1.0.0",
     "ionic-material": "#0.4.2",
-    "robotodraft": "#1.1.0"
+    "robotodraft": "#1.1.0",
+    "underscore": "~1.8.3"
   }
 }

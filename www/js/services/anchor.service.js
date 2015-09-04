@@ -13,6 +13,7 @@
       service.states.push(new State('app.home', 'Home'));
       service.states.push(new State('app.photos', 'Photos'));
       service.states.push(new State('app.help', 'Help'));
+      service.states.push(new State('logout', 'Logout'));
     }
 
     function State(state, name) {
