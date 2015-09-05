@@ -3,8 +3,8 @@
   angular.module('sagffl')
     .controller('MenuController', MenuController);
 
-  MenuController.$inject = ['$log', '$state', 'Anchor', 'ionicMaterialInk'];
-  function MenuController($log, $state, Anchor, ionicMaterialInk) {
+  MenuController.$inject = ['$log', '$state', 'Anchor', 'ionicMaterialInk', 'User'];
+  function MenuController($log, $state, Anchor, ionicMaterialInk, User) {
     $log.debug('Loading MenuController');
     var vm = this;
 

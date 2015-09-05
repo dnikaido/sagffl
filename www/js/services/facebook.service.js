@@ -1,111 +1,11 @@
 (function () {
   'use strict';
   angular.module('facebook', [])
-    .run(initialize)
-    .factory('FacebookAuthorization', FacebookAuthorization)
-    .factory('FacebookService', FacebookService);
+    .factory('Facebook', FacebookService);
 
-  initialize.$inject = ['$window', 'FacebookAuthorization'];
-  function initialize($window, FacebookAuthorization) {
-    $window.fbAsyncInit = function() {
-      FB.init({
-        appId: '400628200140143',
-        channelUrl: 'channel.html',
-        status: true,
-        xfbml: false,
-        version: 'v2.4'
-      });
-      FacebookAuthorization.watchAuthenticationStatusChange();
-    };
-
-    (function(d){
-      // load the Facebook javascript SDK
-
-      var js,
-        id = 'facebook-jssdk',
-        ref = d.getElementsByTagName('script')[0];
-
-      if (d.getElementById(id)) {
-        return;
-      }
-
-      js = d.createElement('script');
-      js.id = id;
-      js.async = true;
-      js.src = "//connect.facebook.net/en_US/all.js";
-
-      ref.parentNode.insertBefore(js, ref);
-
-    }(document));
-  }
-
-  FacebookAuthorization.$inject = ['$log', '$rootScope', '$q'];
-  function FacebookAuthorization($log, $rootScope, $q) {
-    $log.debug('Loading FacebookAuthorization');
-    var service = this;
-
-    $rootScope.user = {};
-    service.user = {
-      isLogged : false,
-      profile : {}
-    };
-
-    service.watchAuthenticationStatusChange = watchAuthenticationStatusChange;
-
-    return service;
-
-    function clearUser() {
-      $log.debug('Logging out of Facebook');
-      service.user.isLogged = false;
-      service.user.profile = {};
-      $rootScope.$broadcast('fbUser', service.user);
-    }
-
-    function getUserInfo() {
-      var deferred = $q.defer();
-
-      FB.api('/me',
-        function(response) {
-          if (!response || response.error) {
-            clearUser();
-            deferred.reject(response.error);
-          } else {
-            service.user.profile = response;
-            deferred.resolve();
-          }
-        });
-      return deferred.promise;
-    }
-
-    function watchAuthenticationStatusChange() {
-      FB.Event.subscribe('auth.authResponseChange', function(response) {
-        if (response.status === 'connected') {
-          service.user.isLogged = true;
-          getUserInfo()
-            .then(function() {
-              broadcastUser();
-            })
-            .catch(function(error) {
-              $log.debug(error);
-              clearUser();
-              broadcastUser();
-            });
-        } else {
-          clearUser();
-          broadcastUser();
-        }
-      });
-    }
-
-    function broadcastUser() {
-      $rootScope.$broadcast('fbUser', {
-        user: service.user
-      });
-    }
-  }
-
-  FacebookService.$inject = ['$log', '$q'];
-  function FacebookService($log, $q) {
+  FacebookService.$inject = ['$log', '$q', '$rootScope'];
+  function FacebookService($log, $q, $rootScope) {
+    $log.debug('loading Facebook');
     var groupPageId = 'sagffl';
 
     return {
@@ -114,33 +14,85 @@
       logout: logout
     };
 
-    function getPhotoData() {
+    function getPhotoData(FB) {
       var deferred = $q.defer();
-      FB.api(
-        '/' + groupPageId + '/photos',
+      FB.api('/' + groupPageId + '/photos',
         {
           fields: 'images'
         },
         function(response) {
-          if (!response || response.error) {
-            deferred.reject(response.error);
+          if(response && !response.error) {
+            resolve(null, response, deferred);
           } else {
-            deferred.resolve(response);
+            resolve(response.error, null, deferred);
           }
         });
       return deferred.promise;
     }
 
-    function login() {
-      FB.login();
+    function login(FB) {
+      $log.debug('Logging in to Facebook');
+      var deferred = $q.defer();
+      FB.getLoginStatus(function(response) {
+        if(!response || response.error) {
+          resolve(response.error, null, deferred);
+        }
+        else if (response.status == 'connected') {
+          $log.debug('Connected to Facebook');
+          FB.api('/me', function(response) {
+            resolve(null, response, deferred, connected);
+          });
+        } else {
+          FB.login(function(response) {
+            if (response.authResponse) {
+              $log.debug('Logged in to Facebook');
+              FB.api('/me', function(response) {
+                resolve(null, response, deferred, connected);
+              });
+            } else {
+              resolve(response.error, null, deferred);
+            }
+          });
+        }
+      });
+      var promise = deferred.promise;
+      promise.connected = false;
+      return promise;
+
+      function connected(retval) {
+        retval.connected = true;
+      }
     }
 
-    function logout() {
+    function logout(FB) {
       $log.debug('Logging out of Facebook');
-      FB.logout(function() {
-        $log.debug('Logged out of Facebook');
-      }, function(response) {
-        $log.debug('There was an error logging out of Facebook:' + response.error);
+      var deferred = $q.defer();
+      FB.logout(function(response) {
+        if(response && !response.error) {
+          resolve(null, response, deferred, disconnected);
+        } else {
+          resolve(response, null, deferred);
+        }
+      });
+      //resolve(null, {}, deferred, disconnected);
+
+      return deferred.promise;
+
+      function disconnected(retval) {
+        retval.connected = false;
+      }
+    }
+
+    function resolve(errval, retval, deferred, success) {
+      $rootScope.$apply(function() {
+        if (errval) {
+          deferred.reject(errval);
+        } else {
+          if(success) {
+            success(retval);
+          }
+          deferred.resolve(retval);
+        }
       });
     }
   }

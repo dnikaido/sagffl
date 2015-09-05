@@ -3,12 +3,15 @@
   angular.module('sagffl')
     .run(SetupStateAccess);
 
-  SetupStateAccess.$inject = ['$log', '$rootScope', 'LoginService'];
-  function SetupStateAccess($log, $rootScope, LoginService) {
+  SetupStateAccess.$inject = ['$log', '$rootScope', '$state', 'User'];
+  function SetupStateAccess($log, $rootScope, $state, User) {
+    $log.debug('running SetupStateAccess');
     $rootScope.$on('$stateChangeStart',
       function (event, toState, toParams, fromState, fromParams) {
-        if(!toState.access.public && !LoginService.user.isLogged) {
-
+        $log.debug('checking accesss...');
+        if(toState.access.required && !User.isLogged) {
+          event.preventDefault();
+          $state.go('logout');
         }
       });
   }

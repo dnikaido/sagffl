@@ -7,6 +7,7 @@
   angular.module('sagffl', [
     'ionic',
     'ionic-material',
+    'utils',
     'ui.router',
     'facebook'
   ])

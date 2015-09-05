@@ -9,16 +9,24 @@
     $urlRouterProvider.otherwise('/login');
     $stateProvider
       .state('login', {
+        cache: false,
         url: '/login',
         templateUrl: 'templates/login/login.html',
-        controller: 'LoginController as vm'
+        controller: 'LoginController as vm',
+        access: {
+          required : false
+        }
       })
       .state('logout', {
+        cache: false,
         url: '/login',
         templateUrl: 'templates/login/login.html',
         controller: 'LoginController as vm',
         data: {
-          logout : true
+          logout: true
+        },
+        access: {
+          required : false
         }
       })
       .state('app', {
@@ -32,6 +40,9 @@
           'menuContent': {
             templateUrl: 'templates/help/help.html'
           }
+        },
+        access: {
+          required : true
         }
       })
       .state('app.home', {
@@ -41,6 +52,9 @@
             templateUrl: 'templates/home/home.html',
             controller: 'HomeController as vm'
           }
+        },
+        access: {
+          required : true
         }
       })
       .state('app.photos', {
@@ -50,12 +64,15 @@
             templateUrl: 'templates/photos/photos.html',
             controller: 'PhotosController as vm'
           }
+        },
+        access: {
+          required : true
         }
       });
   }
 
-  SetupStateDefaults.$inject = ['$log', '$rootScope'];
-  function SetupStateDefaults($log, $rootScope) {
+  SetupStateDefaults.$inject = ['$rootScope'];
+  function SetupStateDefaults($rootScope) {
     $rootScope.$on('$stateChangeStart',
       function (event, toState, toParams, fromState, fromParams) {
         if(!toState.data) {
