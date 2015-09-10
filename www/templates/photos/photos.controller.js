@@ -18,14 +18,14 @@
 
     function getPhotos() {
       vm.photoUrls = $localstorage.getObject('photoUrls');
-      if(_.isEmpty(vm.photoUrls)) {
+      if(!vm.photoUrls) {
         Facebook.getPhotoData(FB)
           .then(function (response) {
             $log.debug(response);
             var photoDataList = response.data;
             var minHeight = 250;
             var maxHeight = 350;
-            vm.photoUrls = _.compact(
+            var photoUrls = _.compact(
               _.pluck(
                 _.map(photoDataList, function (photoData) {
                   return _.find(photoData.images, function (photo) {
@@ -33,10 +33,12 @@
                   })
                 }),
                 'source'));
-            $localstorage.setObject('photoUrls', vm.photoUrls);
+            $localstorage.setObject('photoUrls', photoUrls);
+            return photoUrls;
           })
           .catch(function (error) {
             $log.error(error);
+            return null;
           });
       }
     }

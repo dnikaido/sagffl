@@ -16,7 +16,7 @@
     function activate() {
       $localstorage.clear();
       if($state.current.data.logout) {
-        logout();
+        vm.logout();
       }
     }
 

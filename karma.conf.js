@@ -10,11 +10,10 @@ module.exports = function(config) {
     basePath: basePath,
 
     // frameworks to use
-    frameworks: ['mocha', 'chai-sinon'],
+    frameworks: ['mocha', 'chai', 'sinon-chai', 'chai-as-promised'],
 
     // list of files / patterns to load in the browser
     files: [
-      basePath + '/test/js/globals.js',
       basePath + '/www/lib/angular/angular.js',
       basePath + '/www/lib/angular-animate/angular-animate.js',
       basePath + '/www/lib/angular-sanitize/angular-sanitize.js',
@@ -23,15 +22,15 @@ module.exports = function(config) {
       basePath + '/www/lib/ionic/release/js/ionic.js',
       basePath + '/www/lib/ionic/release/js/ionic-angular.js',
       basePath + '/www/lib/ionic-material/dist/ionic.material.js',
-      basePath + '/test/js/mock.services.module.js',
       basePath + '/www/lib/underscore/underscore.js',
+      basePath + '/test/js/*.js',
       basePath + '/www/js/**/*.js',
       basePath + '/www/templates/**/*.js'
     ],
 
     // list of files to exclude
     exclude: [
-      basePath + '/www/js/services/facebook.service.js'
+      basePath + '/www/js/app.routes.js'
     ],
 
     // test results reporter to use
