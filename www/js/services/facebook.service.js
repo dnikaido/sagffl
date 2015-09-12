@@ -6,7 +6,7 @@
   FacebookService.$inject = ['$log', '$q', '$rootScope'];
   function FacebookService($log, $q, $rootScope) {
     $log.debug('loading Facebook');
-    var groupPageId = 'sagffl';
+    var defaultPageId = 'sagffl';
 
     return {
       getPhotoData: getPhotoData,
@@ -14,9 +14,10 @@
       logout: logout
     };
 
-    function getPhotoData(FB) {
+    function getPhotoData(FB, pageId) {
       var deferred = $q.defer();
-      FB.api('/' + groupPageId + '/photos',
+      var pageId = pageId ? pageId : defaultPageId;
+      FB.api('/' + pageId + '/photos',
         {
           fields: 'images'
         },
@@ -56,11 +57,14 @@
         }
       });
       var promise = deferred.promise;
-      promise.connected = false;
       return promise;
 
       function connected(retval) {
-        retval.connected = true;
+        if(retval.error) {
+          retval.connected = false;
+        } else {
+          retval.connected = true;
+        }
       }
     }
 

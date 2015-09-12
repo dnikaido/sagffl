@@ -10,6 +10,5 @@
 
     vm.user = User;
     vm.message = 'Welcome home!';
-    $scope.message = vm.message;
   }
 })();

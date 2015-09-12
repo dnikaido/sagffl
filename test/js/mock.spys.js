@@ -15,7 +15,7 @@
     return {
       get: sinon.stub().returnsArg(1),
       set:  sinon.stub(),
-      getObject: sinon.stub().returns({}),
+      getObject: sinon.stub().returns(null),
       setObject:  sinon.stub(),
       clear:  sinon.stub()
     };
@@ -37,8 +37,12 @@
     });
     var logoutStub = sinon.stub().returns(logoutDeferred.promise);
 
+    var getPhotoDataDeferred = $q.defer();
+    getPhotoDataDeferred.resolve(getPhotosDataRet);
+    var getPhotoDataStub = sinon.stub().returns(getPhotoDataDeferred.promise);
+
     return {
-      getPhotoData: sinon.stub(),
+      getPhotoData: getPhotoDataStub,
       login: loginStub,
       logout: logoutStub
     };

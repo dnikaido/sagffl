@@ -1,23 +1,33 @@
-//describe('MenuController', function() {
-//  var controller;
-//  var ionicMaterialInk;
-//
-//  beforeEach(module('sagffl'));
-//  beforeEach(module('ionic.mock'));
-//  beforeEach(inject(function($controller, _ionicMaterialInk_) {
-//    ionicMaterialInk = _ionicMaterialInk_;
-//    controller = $controller('MenuController');
-//  }));
-//
-//  describe('#activate', function() {
-//    it('should load MenuController', function() {
-//      expect(controller).to.exist;
-//    });
-//
-//    it('should call displayEffect', function() {
-//      expect(ionicMaterialInk.displayEffect).to.have.been.calledOnce;
-//    });
-//  });
-//
-//
-//});
+describe('MenuController', function() {
+  var controller;
+  var ionicMaterialInk;
+  var MenuController;
+  var spys;
+
+  beforeEach(module('mock.state'));
+  beforeEach(module('mock.services'));
+  beforeEach(function() {
+    spys = {};
+    module('sagffl');
+    inject(function($controller, ionicMaterialInkSpy) {
+      controller = $controller;
+      ionicMaterialInk = ionicMaterialInkSpy;
+    });
+
+    MenuController = controller('MenuController', {
+      ionicMaterialInk: ionicMaterialInk
+    });
+  });
+
+  describe('#activate', function() {
+    it('should load MenuController', function() {
+      expect(MenuController).to.exist;
+    });
+
+    it('should call displayEffect', function() {
+      expect(ionicMaterialInk.displayEffect).to.have.been.calledOnce;
+    });
+  });
+
+
+});

@@ -24,13 +24,10 @@
     }
     function getObject(key) {
       var object = $window.localStorage[key];
-      if(object) {
-        $log.debug('Retrieved ' + key + ' from $localstorage');
-      }
-      return JSON.parse(object || '{}');
+
+      return object ? JSON.parse(object) : null;
     }
     function setObject(key, value) {
-      $log.debug('Set ' + key + ' in $localstorage');
       $window.localStorage[key] = JSON.stringify(value);
     }
     function clear() {
