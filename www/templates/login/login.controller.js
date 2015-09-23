@@ -28,6 +28,9 @@
             username : response.name
           });
           $state.go('app.home');
+        })
+        .catch(function(error) {
+          $log.debug(error);
         });
     }
 

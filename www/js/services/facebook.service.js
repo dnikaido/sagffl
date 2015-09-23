@@ -1,10 +1,12 @@
 (function () {
   'use strict';
-  angular.module('facebook', [])
+  angular.module('facebook', [
+      'ngCordova'
+    ])
     .factory('Facebook', FacebookService);
 
-  FacebookService.$inject = ['$log', '$q', '$rootScope'];
-  function FacebookService($log, $q, $rootScope) {
+  FacebookService.$inject = ['$log', '$q', '$rootScope', '$cordovaOauth'];
+  function FacebookService($log, $q, $rootScope, $cordovaOauth) {
     $log.debug('loading Facebook');
     var defaultPageId = 'sagffl';
 
@@ -40,22 +42,34 @@
         }
         else if (response.status == 'connected') {
           $log.debug('Connected to Facebook');
-          FB.api('/me', function(response) {
-            resolve(null, response, deferred, connected);
-          });
+          setUserInfo(FB, deferred);
         } else {
-          FB.login(function(response) {
-            if (response.authResponse) {
-              $log.debug('Logged in to Facebook');
-              FB.api('/me', function(response) {
-                resolve(null, response, deferred, connected);
-              });
-            } else {
-              resolve(response.error, null, deferred);
-            }
-          });
+          $cordovaOauth.facebook('400628200140143', ["public_profile"])
+            .then(function(response) {
+              if (response.access_token) {
+                $log.debug('Logged in to Facebook');
+                FB.getLoginStatus(function(response) {
+                  if(!response || response.error) {
+                    resolve(response.error, null, deferred);
+                  }
+                  else if (response.status == 'connected') {
+                    $log.debug('Connected to Facebook');
+                    setUserInfo(FB, deferred);
+                  } else {
+                    $log.debug('Crazy error trying to connect to Facebook');
+                    resolve('Could not connect to Facebook', null, deferred);
+                  }
+                }, true);
+              } else {
+                resolve(response.error, null, deferred);
+              }
+            })
+            .catch(function(error) {
+              resolve(error, null, deferred);
+            });
         }
       });
+
       var promise = deferred.promise;
       return promise;
 
@@ -65,6 +79,16 @@
         } else {
           retval.connected = true;
         }
+      }
+
+      function setUserInfo(FB, deferred) {
+        FB.api('/me', function(response) {
+          if(!response || response.error) {
+            resolve(response.error, null, deferred);
+          } else {
+            resolve(null, response, deferred, connected);
+          }
+        });
       }
     }
 

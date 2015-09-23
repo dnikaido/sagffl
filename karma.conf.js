@@ -23,6 +23,8 @@ module.exports = function(config) {
       basePath + '/www/lib/ionic/release/js/ionic-angular.js',
       basePath + '/www/lib/ionic-material/dist/ionic.material.js',
       basePath + '/www/lib/underscore/underscore.js',
+      basePath + '/www/lib/ngCordova/dist/ng-cordova.js',
+      basePath + '/www/lib/ngCordova/dist/ng-cordova-mocks.js',
       basePath + '/test/js/*.js',
       basePath + '/www/js/**/*.js',
       basePath + '/www/templates/**/*.js'
