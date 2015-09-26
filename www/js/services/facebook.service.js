@@ -5,10 +5,10 @@
     ])
     .factory('Facebook', FacebookService);
 
-  FacebookService.$inject = ['$log', '$q', '$rootScope', '$cordovaOauth'];
-  function FacebookService($log, $q, $rootScope, $cordovaOauth) {
+  FacebookService.$inject = ['$log', '$q', '$rootScope', '$cordovaOauth', 'Config'];
+  function FacebookService($log, $q, $rootScope, $cordovaOauth, Config) {
     $log.debug('loading Facebook');
-    var defaultPageId = 'sagffl';
+    var defaultPageId = Config.FACEBOOK_PAGE_ID;
 
     return {
       getPhotoData: getPhotoData,

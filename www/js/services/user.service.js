@@ -10,7 +10,7 @@
 
     service.isLogged = false;
     service.username = '';
-
+    
     service.setUser = setUser;
 
     function setUser(user) {

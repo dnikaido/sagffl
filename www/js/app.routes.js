@@ -38,7 +38,8 @@
         url: '/help',
         views: {
           'menuContent': {
-            templateUrl: 'templates/help/help.html'
+            templateUrl: 'templates/programs/programs.html',
+            controller: 'ProgramsController as vm'
           }
         },
         access: {
@@ -71,10 +72,10 @@
       });
   }
 
-  SetupStateDefaults.$inject = ['$rootScope'];
-  function SetupStateDefaults($rootScope) {
+  SetupStateDefaults.$inject = ['$log', '$rootScope'];
+  function SetupStateDefaults($log, $rootScope) {
     $rootScope.$on('$stateChangeStart',
-      function (event, toState, toParams, fromState, fromParams) {
+      function(event, toState, toParams, fromState, fromParams) {
         if(!toState.data) {
           toState.data = {};
         }

@@ -8,3 +8,4 @@ plugins/
 test/coverage/
 www/lib
 www/css
+www/js/app.config.js

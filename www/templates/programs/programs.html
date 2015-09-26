@@ -1,0 +1,14 @@
+<ion-view title="Programs" ng-ink>
+  <ion-content padding="true">
+    <div class="list animate-fade-slide-in-right">
+      <a ng-repeat="program in vm.programs"
+         class="item item-thumbnail-left"
+         ng-last-repeat="programs">
+        <img ng-src="../img/{{ program.sport }}.jpg">
+        <h2>{{ program.name }}</h2>
+        <p class="wrap">{{ program.scheduleDays }} {{ program.scheduleTimes }} @ {{ program.location }}</p>
+      </a>
+    </div>
+  </ion-content>
+</ion-view>
+

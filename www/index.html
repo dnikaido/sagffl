@@ -3,43 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://connect.facebook.net https://graph.facebook.com">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://api.leagueapps.com http://connect.facebook.net https://connect.facebook.net https://graph.facebook.com">
 
     <title></title>
     <!-- compiled css output -->
     <link href="css/main.css" rel="stylesheet">
   </head>
   <body ng-app="sagffl">
-    <ion-nav-view></ion-nav-view>
-
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/release/js/ionic.bundle.js"></script>
-    <script src="lib/ionic-material/dist/ionic.material.js"></script>
-
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
-    <script src="cordova.js"></script>
-
-    <!--third party js-->
-    <script src="lib/underscore/underscore.js"></script>
-
-    <!-- your app's js -->
-    <script src="js/app.module.js"></script>
-    <script src="js/app.routes.js"></script>
-    <script src="js/app.security.js"></script>
-
-    <!--controllers -->
-    <script src="templates/home/home.controller.js"></script>
-    <script src="templates/login/login.controller.js"></script>
-    <script src="templates/menu/menu.controller.js"></script>
-    <script src="templates/photos/photos.controller.js"></script>
-
-    <!--services -->
-    <script src="js/services/anchor.service.js"></script>
-    <script src="js/services/facebook.service.js"></script>
-    <script src="js/services/user.service.js"></script>
-    <script src="js/services/utils.service.js"></script>
-
     <script src="http://connect.facebook.net/en_US/all.js"></script>
     <script>
       window.fbAsyncInit = function() {
@@ -72,5 +42,42 @@
 
       }(document));
     </script>
+
+    <ion-nav-view></ion-nav-view>
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/release/js/ionic.bundle.js"></script>
+    <script src="lib/ionic-material/dist/ionic.material.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+    <script src="cordova.js"></script>
+
+    <!--third party js-->
+    <script src="lib/underscore/underscore.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.module.js"></script>
+    <script src="js/app.routes.js"></script>
+    <script src="js/app.security.js"></script>
+    <script src="js/app.config.js"></script>
+
+    <!--controllers -->
+    <script src="templates/home/home.controller.js"></script>
+    <script src="templates/login/login.controller.js"></script>
+    <script src="templates/menu/menu.controller.js"></script>
+    <script src="templates/photos/photos.controller.js"></script>
+    <script src="templates/programs/programs.controller.js"></script>
+
+    <!--services -->
+    <script src="js/services/anchor.service.js"></script>
+    <script src="js/services/facebook.service.js"></script>
+    <script src="js/services/user.service.js"></script>
+    <script src="js/services/utils.service.js"></script>
+    <script src="js/services/leagueapps.service.js"></script>
+
+    <!--directives-->
+    <script src="js/directives/ink.directive.js"></script>
+
   </body>
 </html>

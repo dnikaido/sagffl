@@ -3,12 +3,25 @@
   angular.module('sagffl')
     .controller('HomeController', HomeController);
 
-  HomeController.$inject = ['$log', '$scope', 'User'];
-  function HomeController($log, $scope, User) {
+  HomeController.$inject = ['$log','User', '$leagueapps'];
+  function HomeController($log, User, $leagueapps) {
     $log.debug('Loading HomeController');
     var vm = this;
 
+    vm.announcements = [];
     vm.user = User;
-    vm.message = 'Welcome home!';
+
+    activate();
+
+    function activate() {
+      $leagueapps.getAnnouncements()
+        .success(function(response) {
+          $log.debug(response);
+          vm.announcements = response;
+        })
+        .catch(function(error) {
+          $log.debug(error);
+        });
+    }
   }
 })();

@@ -5,8 +5,11 @@
 // the 2nd parameter is an array of 'requires'
 (function() {
   angular.module('sagffl', [
+    'ngSanitize',
     'ionic',
     'ionic-material',
+    'ionic-material.directives',
+    'sagffl.config',
     'utils',
     'ui.router',
     'facebook'

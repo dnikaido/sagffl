@@ -5,6 +5,7 @@ var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
+var ngConfig = require('gulp-ng-config');
 var sh = require('shelljs');
 var karma = require('gulp-karma');
 
@@ -26,6 +27,12 @@ gulp.task('sass', function(done) {
     .pipe(rename({ extname: '.min.css' }))
     .pipe(gulp.dest('./www/css/'))
     .on('end', done);
+});
+
+gulp.task('ngConfig', function() {
+  gulp.src('app.config.json')
+    .pipe(ngConfig('sagffl.config'))
+    .pipe(gulp.dest('./www/js'))
 });
 
 gulp.task('karma', function() {
