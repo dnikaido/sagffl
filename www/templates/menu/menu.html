@@ -1,4 +1,4 @@
-<ion-side-menus enable-menu-with-back-views="true" ng-ink>
+<ion-side-menus enable-menu-with-back-views="true">
 
   <!--Center content-->
   <ion-side-menu-content>
@@ -11,20 +11,20 @@
       </ion-nav-buttons>
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
-    <div class="tabs tabs-positive tabs-icon-top">
+    <div class="tabs tabs-positive tabs-icon-top mdl-js-ripple-effect">
       <a ui-sref="app.home"
-         class="tab-item"
-         ng-class="{ active : vm.$state.includes('app.home') }">
+         class="tab-item mdl-layout__tab"
+         ng-class="{ 'active is-active': vm.$state.includes('app.home') }">
         <i class="icon ion-home"></i> Home
       </a>
       <a ui-sref="app.photos"
-         class="tab-item"
-         ng-class="{ active : vm.$state.includes('app.photos') }">
+         class="tab-item mdl-layout__tab"
+         ng-class="{ 'active is-active': vm.$state.includes('app.photos') }">
         <i class="icon ion-images"></i> Photos
       </a>
       <a ui-sref="app.help"
-         class="tab-item"
-         ng-class="{ active : vm.$state.includes('app.help') }">
+         class="tab-item mdl-layout__tab"
+         ng-class="{ 'active is-active' : vm.$state.includes('app.help') }">
         <i class="icon ion-help"></i> Help
       </a>
     </div>

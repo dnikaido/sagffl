@@ -3,8 +3,8 @@
   angular.module('sagffl')
     .controller('ProgramsController', ProgramsController);
 
-  ProgramsController.$inject = ['$log', '$leagueapps', '$scope', 'ionicMaterialInk', 'ionicMaterialMotion', '$timeout'];
-  function ProgramsController($log, $leagueapps, $scope,  ionicMaterialInk, ionicMaterialMotion, $timeout) {
+  ProgramsController.$inject = ['$log', '$leagueapps', '$scope', '$timeout'];
+  function ProgramsController($log, $leagueapps, $scope, $timeout) {
     $log.debug('loading ProgramsController');
     var vm = this;
 
@@ -21,12 +21,6 @@
         .catch(function(error) {
             $log.debug(error);
         });
-      $scope.$on('ngLastRepeat.programs', function() {
-        $timeout(function() {
-          ionicMaterialMotion.fadeSlideInRight();
-          ionicMaterialInk.displayEffect();
-        },100);
-      });
     }
   }
 })();

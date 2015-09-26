@@ -7,8 +7,6 @@
   angular.module('sagffl', [
     'ngSanitize',
     'ionic',
-    'ionic-material',
-    'ionic-material.directives',
     'sagffl.config',
     'utils',
     'ui.router',

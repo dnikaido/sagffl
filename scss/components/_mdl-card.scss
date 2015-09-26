@@ -1,0 +1,22 @@
+.mdl-card .mdl-card__title.mdl-card__avatar {
+  display: block;
+  padding-left: 95px;
+
+  img {
+    border-radius: 50%;
+    height: 50px;
+    left: 16px;
+    position: absolute;
+    top: 16px;
+    width: 50px;
+  }
+  .mdl-card__title-text {
+    font-size: 16px;
+  }
+  .mdl-card__title-subtext {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #666;
+  }
+}

@@ -1,6 +1,5 @@
 //Vendors
 @import 'vendor/ionic.app';
-@import 'vendor/robotodraft';
 
 //Utils
 
@@ -9,9 +8,11 @@
 //Layout
 
 //Components
-@import 'components/item';
+@import 'components/mdl-card';
+@import 'components/mdl-grid';
 
 //Templates
-@import 'templates/login/login';
+@import 'templates/login';
+@import 'templates/home';
 
 //Themes

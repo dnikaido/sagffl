@@ -9,10 +9,10 @@
     $rootScope.$on('$stateChangeStart',
       function (event, toState, toParams, fromState, fromParams) {
         $log.debug('checking accesss...');
-        if(toState.access.required && !User.isLogged) {
-          event.preventDefault();
-          $state.go('logout');
-        }
+        //if(toState.access.required && !User.isLogged) {
+        //  event.preventDefault();
+        //  $state.go('logout');
+        //}
       });
   }
 })();
